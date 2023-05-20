@@ -4,11 +4,6 @@
 using namespace std;
 class pharmacyItem
 {
-private:
-    string Name;
-    double cost;
-    int quant;
-
 protected:
     enum pkgType
     {
@@ -17,21 +12,33 @@ protected:
         ampoule
     };
 
+private:
+    string Name;
+    double cost;
+    int quant;
+    pkgType pkg;
+
+
 public:
     pharmacyItem(string n, double c, int q, pkgType type_val)
     {
         Name = n;
         cost = c;
         quant = q;
-        type_val = box;
+        pkg = type_val;
     }
     void set_cos(double new_cost)
     {
         cost = new_cost;
     }
-    double get_cost()
-    {
-        return cost;
+    double get_cost() {
+        if (pkg == box) {
+            return cost;
+        }
+        else if (pkg == tape || pkg == ampoule) {
+            return cost / quant;
+        }
+
     }
     double increase_Qty(double new_quant)
     {
